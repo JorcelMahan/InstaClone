@@ -6,14 +6,10 @@ const PublicationSchema = new mongoose.Schema({
         required: true,
         ref: "User"
     },
-    file: {
+    url: {
         type: String,
         trim: true,
         required: true
-    },
-    fileType: {
-        type: String,
-        trim: true,
     },
 }, {
     timestamps: true

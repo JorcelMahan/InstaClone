@@ -3,10 +3,10 @@ import User from "../models/User.js";
 import Follow from "../models/Follow.js";
 
 // TODO: Implement the uploadFile function
-const publish = async (file, ctx) => {
+const publish = async (url, ctx) => {
     try {
         const publication = new Publication({
-            file,
+            url,
             user: ctx.user.id,
         });
 
@@ -33,6 +33,10 @@ const getPublications = async (username) => {
 }
 
 const getPublicationsFollowed = async (ctx) => {
+
+    // throw and error in the ctx is empty
+    if (!ctx.user) throw new Error('Usuario no autenticado');
+
     try {
         const followed = await Follow.find({ user: ctx.user.id }).populate('follow');
         const followedList = followed.map(follow => follow.follow);

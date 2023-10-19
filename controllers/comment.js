@@ -17,9 +17,9 @@ const addComment = (input, ctx) => {
     }
 }
 
-const getComments = async publication => {
+const getComments = async idPublication => {
     try {
-        const comments = await Comment.find({ publication }).populate('user');
+        const comments = await Comment.find({ publication: idPublication }).populate('user');
         return comments;
     } catch (error) {
         console.log(error);

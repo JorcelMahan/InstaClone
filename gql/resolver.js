@@ -21,18 +21,18 @@ const resolvers = {
         getPublicationsFollowed: (_, { }, ctx) => publicationController.getPublicationsFollowed(ctx),
 
         // Comment
-        getComments: (_, { id }) => commentController.getComments(id),
+        getComments: (_, { idPublication }) => commentController.getComments(idPublication),
 
         // Like
-        isLike: (_, { publication }, ctx) => likeController.isLike(publication, ctx),
-        countLikes: (_, { publication }) => likeController.countLikes(publication)
+        isLike: (_, { idPublication }, ctx) => likeController.isLike(idPublication, ctx),
+        countLikes: (_, { idPublication }) => likeController.countLikes(idPublication)
     },
 
     Mutation: {
         // User
         register: (_, { input }) => userController.register(input),
         login: (_, { input }) => userController.login(input),
-        updateAvatar: (_, { file }, ctx) => userController.updateAvatar(file, ctx),
+        updateAvatar: (_, { url }, ctx) => userController.updateAvatar(url, ctx),
         deleteAvatar: (_, { }, ctx) => userController.deleteAvatar(ctx),
         updateUser: (_, { input }, ctx) => userController.updateUser(input, ctx),
 
@@ -41,14 +41,14 @@ const resolvers = {
         unFollow: (_, { username }, ctx) => followController.unFollow(username, ctx),
 
         // Publication
-        publish: (_, { file }, ctx) => publicationController.publish(file, ctx),
+        publish: (_, { url }, ctx) => publicationController.publish(url, ctx),
 
         // Comment
         addComment: (_, { input }, ctx) => commentController.addComment(input, ctx),
 
         // Like
-        addLike: (_, { publication }, ctx) => likeController.addLike(publication, ctx),
-        deleteLike: (_, { publication }, ctx) => likeController.deleteLike(publication, ctx)
+        addLike: (_, { idPublication }, ctx) => likeController.addLike(idPublication, ctx),
+        deleteLike: (_, { idPublication }, ctx) => likeController.deleteLike(idPublication, ctx)
     }
 };
 

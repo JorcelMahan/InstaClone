@@ -87,6 +87,7 @@ const getNotFollowed = async ctx => {
         }
     }
 
+
     return arrayUsers;
 }
 

@@ -52,7 +52,7 @@ const login = async input => {
     if (!passwordSuccess) throw new Error("Error en el email o contraseña");
 
     return {
-        token: createToken(userFound, process.env.SECRET_KEY, "24h")
+        token: createToken(userFound, process.env.SECRET_WORD, "24h")
     }
 }
 
@@ -66,27 +66,20 @@ const getUser = async (id, username) => {
 
 }
 
-// TODO: implement upload file
-const updateAvatar = async (file, ctx) => {
+
+const updateAvatar = async (url, ctx) => {
     const { id } = ctx.user;
     try {
-        const { createReadStream, mimetype } = await file;
-        const extension = mimetype.split("/")[1];
-        const imageName = `avatar/${id}.${extension}`;
-        const fileData = createReadStream();
-
-        fileData.pipe(createWriteStream(`public/${imageName}`));
-
-        await User.findByIdAndUpdate(id, { avatar: imageName });
+        await User.findByIdAndUpdate(id, { avatar: url });
         return {
             status: true,
-            urlAvatar: imageName
+            url
         }
     } catch (error) {
         console.log(error);
         return {
             status: false,
-            urlAvatar: null
+            url: null
         }
     }
 }

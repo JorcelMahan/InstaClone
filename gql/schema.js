@@ -10,6 +10,7 @@ const typeDefs = `#graphql
         description: String
         password: String
         avatar: String
+        createdAt: String
     }
 
     type Token {
@@ -24,8 +25,8 @@ const typeDefs = `#graphql
     type Publication {
         id: ID
         user: ID
-        file: String
-        fileType: String
+        url: String
+        createdAt: String
     }
 
     type Comment {
@@ -37,8 +38,8 @@ const typeDefs = `#graphql
     type FeedPublication {
         id: ID
         user: User
-        file: String
-        type: String
+        url: String
+        createdAt: String
     }
 
 
@@ -93,6 +94,7 @@ const typeDefs = `#graphql
         # Like
         isLike(idPublication: ID!): Boolean
         countLikes(idPublication: ID!): Int
+        
     }
 
     # Mutations

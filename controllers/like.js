@@ -1,10 +1,10 @@
 import Like from '../models/Like.js';
 
 
-const addLike = async (publication, ctx) => {
+const addLike = async (idPublication, ctx) => {
     try {
         const like = new Like({
-            publication,
+            publication: idPublication,
             user: ctx.user.id
         });
 
@@ -17,9 +17,9 @@ const addLike = async (publication, ctx) => {
     }
 }
 
-const deleteLike = async (publication, ctx) => {
+const deleteLike = async (idPublication, ctx) => {
     try {
-        await Like.deleteOne({ publication }).where('user').equals(ctx.user.id);
+        await Like.deleteOne({ publication: idPublication }).where('user').equals(ctx.user.id);
         return true;
     } catch (error) {
         console.log(error);
@@ -28,9 +28,11 @@ const deleteLike = async (publication, ctx) => {
 }
 
 
-const isLike = async (publication, ctx) => {
+const isLike = async (idPublication, ctx) => {
     try {
-        const like = await Like.findOne({ publication }).where({
+        const like = await Like.findOne({
+            publication: idPublication
+        }).where({
             user: ctx.user.id
         });
 
@@ -44,9 +46,9 @@ const isLike = async (publication, ctx) => {
     }
 }
 
-const countLikes = async (publication) => {
+const countLikes = async (idPublication) => {
     try {
-        const count = await Like.countDocuments({ publication });
+        const count = await Like.countDocuments({ publication: idPublication });
         return count;
     } catch (error) {
         console.log(error);
